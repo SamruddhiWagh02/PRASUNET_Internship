@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopwatch Web Application</title>
+ 
+</head>
+<body>
+    <h1>Stopwatch Web Application</h1>
+  <div class="container">
+    <div class="timer-display">00:00:00.000</div>
+    <div class="buttons">
+      <button id="start-btn">Start</button>
+      <button id="stop-btn" disabled>Stop</button>
+      <button id="reset-btn" disabled>Reset</button>
+    </div>
+  </div>
+
+<style>
+body{
+   background-image: url("./\task2photo.jpg");
+}
+h1 {
+  text-align: center;
+  position:relative;
+  top:50px; 
+  text-decoration: underline;
+  font-size:45px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.container {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  width: 90vw;
+  height:75vh;
+  
+}
+.timer-display {
+  font-size: 3rem;
+  font-weight:bold;
+  justify-content:center;
+  display:flex;
+}
+.buttons {
+  margin-top:2rem;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+button {
+  padding: 1rem 3rem;
+  border: none;
+  border-radius:6px;
+  cursor:pointer;
+  margin:3px;
+  justify-content:center;
+  display:flex;
+}
+#start-btn {
+  background-color: rgb(23, 236, 12);
+  color: rgb(5, 5, 5);
+}
+#stop-btn {
+  background-color:red;
+  color: black;
+}
+#reset-btn {
+  background-color:#dff307;
+  color:black;
+}
+</style>
+
+<script >
+    const timerDisplay = document.querySelector('.timer-display');
+const startBtn = document.getElementById('start-btn');
+const stopBtn = document.getElementById('stop-btn');
+const resetBtn = document.getElementById('reset-btn');
+
+let startTime = 0;
+let elapsedTime = 0;
+let intervalId = null;
+
+startBtn.addEventListener('click', () => {
+  startTime = Date.now() - elapsedTime;
+  intervalId = setInterval(() => {
+    elapsedTime = Date.now() - startTime;
+    updateTimerDisplay(elapsedTime);
+  }, 10);
+  startBtn.disabled = true;
+  stopBtn.disabled = false;
+  resetBtn.disabled = false;
+});
+
+stopBtn.addEventListener('click', () => {
+  clearInterval(intervalId);
+  intervalId = null;
+  startBtn.disabled = false;
+  stopBtn.disabled = true;
+});
+
+resetBtn.addEventListener('click', () => {
+  clearInterval(intervalId);
+  startTime = 0;
+  elapsedTime = 0;
+  updateTimerDisplay(elapsedTime);
+  intervalId = null;
+  startBtn.disabled = false;
+  stopBtn.disabled = true;
+  resetBtn.disabled = true;
+});
+
+function updateTimerDisplay(timeInMs) {
+  const hours = Math.floor((timeInMs / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((timeInMs / (1000 * 60)) % 60);
+  const seconds = Math.floor((timeInMs / 1000) % 60);
+  const milliseconds = Math.floor(timeInMs % 1000);
+
+  timerDisplay.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
+}
+</script>
+</body>
+</html>
+

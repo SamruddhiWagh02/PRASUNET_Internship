@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Landing Page </title>
+</head>
+<body>
+    <nav id="Navigation">
+        <ul>
+            <li><a href="#"> Home </a></li>
+            <li><a href="#">Today's Deals</a></li>
+            <li><a href="#">Fashion</a></li>
+            <li><a href="#">Contack Us</a></li>
+    </nav>
+    
+    <h1>Responsive Landing Page</h1>
+    <div style="height: 2000px;"></div>
+    
+    <style>
+    body {
+      margin: 0;
+      font:italic;
+      background-image: url("./photo1.jpg");
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0px;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      position: relative;
+      top: 250px;
+      text-decoration: underline;
+      font-size:50px;
+    }
+    p {
+      position: relative;
+      top: 30px;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content:space-around;
+    }
+    nav a {
+      color: white;
+      padding: 5px 10px;
+    }
+    nav a:hover {
+      background-color: #222;
+      color: aqua;
+    }
+    #Navigation.scrolled {
+      background-color:rgb(240, 162, 18);
+      color: yellow;
+    }  
+ </style>
+ <script>
+    const nav = document.getElementById('Navigation');
+      
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > nav.offsetHeight) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      });
+ </script>
+</body>
+</html>
+
